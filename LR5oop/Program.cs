@@ -37,13 +37,19 @@ class Program
         int count = CountOccurrences(arr, key);
         Console.WriteLine($"Ключ {key} зустрічається {count} раз(и).");
 
-        // --- 7. Пошук (бінарний метод) ---
-        int index = BinarySearch(arr, key);
-
-        if (index != -1)
-            Console.WriteLine($"Елемент {key} знайдено на позиції {index + 1}.");
+        // --- 7. Бінарний пошук ---
+        int indexBinary = BinarySearch(arr, key);
+        if (indexBinary != -1)
+            Console.WriteLine($"(Бінарний пошук) Елемент {key} знайдено на позиції {indexBinary + 1}.");
         else
-            Console.WriteLine($"Елемент {key} не знайдено у масиві.");
+            Console.WriteLine($"(Бінарний пошук) Елемент {key} не знайдено.");
+
+        // --- 8. Послідовний пошук ---
+        int indexSeq = SequentialSearch(arr, key);
+        if (indexSeq != -1)
+            Console.WriteLine($"(Послідовний пошук) Елемент {key} знайдено на позиції {indexSeq + 1}.");
+        else
+            Console.WriteLine($"(Послідовний пошук) Елемент {key} не знайдено.");
     }
 
     // --- Метод виведення масиву ---
@@ -95,6 +101,17 @@ class Program
                 left = mid + 1;
             else
                 right = mid - 1;
+        }
+        return -1;
+    }
+
+    // --- Метод послідовного пошуку ---
+    static int SequentialSearch(int[] arr, int key)
+    {
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (arr[i] == key)
+                return i;
         }
         return -1;
     }
